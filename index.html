@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Webpage Title -->
+<title>Eugene Magsino — Engineering Portfolio</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- CSS Styles -->
+<style>
+  :root {
+    --bg: #F1EFE6;
+    --bg-raised: #E7E4D6;
+    --ink: #1B2333;
+    --ink-dim: #5B6472;
+    --copper: #A8571E;
+    --copper-strong: #8A4517;
+    --teal: #3C6A5B;
+    --line: rgba(27,35,51,0.14);
+    --line-strong: rgba(27,35,51,0.28);
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16233A;
+      --bg-raised: #1D2E4A;
+      --ink: #EDEEE7;
+      --ink-dim: #A9B6C8;
+      --copper: #E0A06A;
+      --copper-strong: #F0B583;
+      --teal: #8FC2AE;
+      --line: rgba(237,238,231,0.14);
+      --line-strong: rgba(237,238,231,0.28);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16233A;
+    --bg-raised: #1D2E4A;
+    --ink: #EDEEE7;
+    --ink-dim: #A9B6C8;
+    --copper: #E0A06A;
+    --copper-strong: #F0B583;
+    --teal: #8FC2AE;
+    --line: rgba(237,238,231,0.14);
+    --line-strong: rgba(237,238,231,0.28);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--copper); color: var(--bg); }
+
+  a { color: var(--copper); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+  a:hover { border-bottom-color: var(--copper); }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    padding: 88px 0 64px;
+    overflow: hidden;
+  }
+  .hero-trace {
+    position: absolute;
+    top: 0; right: -60px;
+    width: 420px; height: 420px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-kicker {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    margin: 0 0 18px;
+    letter-spacing: 0.02em;
+  }
+  h1.name {
+    font-size: clamp(40px, 7vw, 60px);
+    line-height: 1.05;
+    font-weight: 700;
+    margin: 0 0 14px;
+    max-width: 11ch;
+  }
+  .hero-role {
+    font-size: 19px;
+    color: var(--ink-dim);
+    max-width: 46ch;
+    margin: 0 0 32px;
+  }
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .contact-row a { border-bottom: 1px solid var(--line-strong); }
+
+  /* ---------- sections ---------- */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--ink-dim);
+    margin: 0 0 28px;
+  }
+  .lede {
+    font-size: 18px;
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  /* ---------- skills datasheet ---------- */
+  .datasheet { border-top: 1px solid var(--line-strong); }
+  .ds-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ds-label {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-dim);
+    padding-top: 2px;
+  }
+  .ds-value { font-size: 16px; }
+
+  /* ---------- projects ---------- */
+  .project {
+    border: 1px solid var(--line-strong);
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .project:last-child { margin-bottom: 0; }
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .project-title { font-size: 21px; font-weight: 600; margin: 0; }
+  .project-meta {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .project-desc { margin: 0 0 16px; color: var(--ink); max-width: 62ch; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-dim);
+    border: 1px solid var(--line-strong);
+    padding: 3px 9px;
+  }
+
+  /* ---------- more builds ---------- */
+  .more-list { border-top: 1px solid var(--line-strong); }
+  .more-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .more-item-title { font-weight: 600; font-size: 15px; }
+  .more-item-desc { color: var(--ink-dim); font-size: 15px; }
+
+  /* ---------- experience / education ---------- */
+  .entry { margin-bottom: 22px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .entry-title { font-weight: 600; font-size: 16px; }
+  .entry-when { font-family: var(--mono); font-size: 12.5px; color: var(--ink-dim); }
+  .entry-desc { color: var(--ink-dim); font-size: 15px; margin: 0; }
+
+  /* ---------- footer ---------- */
+  footer {
+    padding: 56px 0 80px;
+    border-top: 1px solid var(--line);
+  }
+  .footer-cta {
+    font-size: 24px;
+    font-weight: 600;
+    max-width: 16ch;
+    margin: 0 0 24px;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .footer-note {
+    margin-top: 40px;
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+
+  @media (max-width: 560px) {
+    .hero { padding: 56px 0 40px; }
+    .ds-row { grid-template-columns: 1fr; gap: 4px; }
+    .more-item { grid-template-columns: 1fr; gap: 4px; }
+    .project { padding: 20px; }
+    .hero-trace { width: 260px; height: 260px; right: -80px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <svg class="hero-trace" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="var(--copper)" stroke-width="1.5">
+        <path d="M40 40 H180 V120 H320 V60"/>
+        <path d="M20 140 H120 V220 H60 V320"/>
+        <path d="M200 160 H260 V260 H360 V200"/>
+        <path d="M120 300 H220 V360"/>
+      </g>
+      <g fill="var(--copper)">
+        <circle cx="40" cy="40" r="4"/>
+        <circle cx="320" cy="60" r="4"/>
+        <circle cx="20" cy="140" r="4"/>
+        <circle cx="60" cy="320" r="4"/>
+        <circle cx="200" cy="160" r="4"/>
+        <circle cx="360" cy="200" r="4"/>
+        <circle cx="220" cy="360" r="4"/>
+      </g>
+      <g fill="none" stroke="var(--teal)" stroke-width="1.5" opacity="0.7">
+        <path d="M300 20 V90 H240"/>
+        <path d="M380 260 H300 V340"/>
+      </g>
+    </svg>
+
+    <!-- Hero -->
+    <div class="hero-inner">
+      <p class="hero-kicker"> Engineering Portfolio </p>
+      <h1 class="name"><p style="text-align: justify;"> Eugene James Magsino</p></p></h1>
+      <p class="hero-role"> Engineering Science @ SFU</p>
+      <p class="hero-role"><p style="text-align: justify;">I tend to look at things and wonder how they could work better.
+        I break problems down, explore possible solutions, build what's needed, and bringing the pieces together into something that works. <br><br>
+        <i> I like to learn by doing, and I like to do by learning.</i>
+      </p></p>
+
+      <!-- Contact -->
+      <div class="contact-row">
+        <a href="mailto:ejm19@sfu.ca">Email: ejm19@sfu.ca</a>
+        <a href="tel:+17787913006">Phone: +1 (778) 791-3006</a>
+        <a href="https://www.linkedin.com/in/emagsino0718/" target="_blank" rel="noopener">LinkedIn: linkedin.com/in/emagsino0718</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- About Me -->
+  <section id="about">
+    <h2> About Me </h2>
+    <p class="lede"><p style="text-align: justify;"> 
+        I am a second year Engineering Science student at Simon Fraser University who enjoys turning ideas into projects.
+        My interests span both the hardware and software aspects of engineering, and I enjoy understanding how different pieces come together to solve problems.
+        Through coursework, personal projects, and independent learning, I have developed a foundation in programming, simulation, hardware design, and CAD, while continuing to expand my technical skills.
+        I enjoy learning new tools, working through challenges, and collaborating with others to create solutions that are practical and effective.
+        As I further my education, I look forward to applying what I have learned in real-world settings, contributing to meaningful projects, and taking on new challenges that will help me grow.
+    </p></p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="datasheet">
+      <div class="ds-row">
+        <div class="ds-label">Programming</div>
+        <div class="ds-value">C++, Python, MATLAB, HTML, CSS</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-label">Simulation</div>
+        <div class="ds-value">LTspice, ModelSim</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-label">Hardware &amp; Embedded</div>
+        <div class="ds-value">Arduino, Raspberry Pi, FPGA, VHDL, PCB Soldering &amp; Assembly</div>
+      </div>
+      <div class="ds-row">
+        <div class="ds-label">CAD &amp; Design</div>
+        <div class="ds-value">AutoCAD, SolidWorks, Figma</div>
+      </div>
+      <div class ="ds-row">
+        <div class="ds-label">Productivity</div>
+        <div class="ds-value">Microsoft Office</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Featured Projects</h2>
+
+    <!-- FPGA Alarm Clock -->
+    <div class="project">
+      <div class="project-head">
+        <h3 class="project-title">Alarm Clock System - FPGA</h3>
+        <span class="project-meta">ENSC 252 | May to July 2026 </span>
+      </div>
+      <p class="project-desc"><p style="text-align: justify;">
+        <h4> Project Parameters </h4>
+        <p style="text-align: justify;"> 
+            Design a functional digital alarm clock on an FPGA board that could accept physical user inputs for configuring the clock and alarm while managing multiple operating states. </p>
+        <h4> Design Process </h4>
+        <p style="text-align: justify;"> 
+            The system was designed around a finite state machine (FSM) written in VHDL. I used one-hot state encoding and edge detection to manage button inputs and control transitions between clock, configuration, and alarm states.
+            Before deploying the design to the FPGA, I developed ModelSim test benches to verify state transitions and timing behavior. This allowed me to identify and correct logic and timing issues before integrating the system onto the Intel DE10 board.
+        </p>
+        <h4> Challenges </h4>
+        <p style="text-align: justify;"> 
+            A major challenge was ensuring that the FSM correctly handled all possible input sequences, especially when multiple buttons were pressed in quick succession.
+            Implementing the one-hot encoding state also proved to be a challenge, as it required careful management of state transitions and outputs to avoid glitches in the display and alarm behavior.
+        </p>
+        <h4> Result </h4>
+        <p style="text-align:justify;">
+            The final design combined the FSM, input handling, real-time display, and alarm control into a single FPGA-based system.
+        </p>
+        <h4> What I Learned </h4>
+        <p style="text-align:justify;">
+            Strengthened my understanding of FSM design, VHDL coding practice, and learned the importance of thorough simulation and hardware testing as they complement each other when debugging digital systems.
+        </p>
+      </p>
+
+      <!--- Youtube Link --->
+      <a href="https://youtu.be/ir2jUw4GCrA" class="youtube-link"> Project Video <br></a>
+
+      <br>
+      <div class="tag-row">
+        <span class="tag"> FSM Design </span>
+        <span class="tag"> VHDL </span>
+        <span class="tag"> ModelSim </span>
+        <span class="tag"> FPGA Integration </span>
+        <span class="tag"> Collaborative </span>
+      </div>
+    </div>
+
+    <!-- LED Circuit -->
+    <div class="project">
+      <div class="project-head">
+        <h3 class="project-title"> Touch-Activated LED Circuit </h3>
+        <span class="project-meta"> ENSC 120 | September to December 2025 </span>
+      </div>
+      <p class="project-desc"><p style="text-align: justify;">
+        <h4> Project Parameters </h4>
+        <p style="text-align: justify;"> 
+            Build a physical LED PCB Circuit board capable of detecting a user's touch and activating the LED accordingly, while incorporating a gradual fade-out after the touch is released. </p>
+        <h4> Design Process </h4>
+        <p style="text-align: justify;"> 
+            I assembled the circuit by soldering transistors, ICs, LEDs, timing components, and other necessary components onto a built PCB.
+            A copper touchpoint was incorporated as the user input, with the timing circuitry controlling the LED's activation and fade-out behavior.
+            After assembly, I tested the PCB and identified issues with component placement that affected the circuit's performance.
+            When the circuit did not behave as expected, I diagnosed the problem and corrected the placement of components to ensure reliable operation.
+        </p>
+        <h4> Challenges </h4>
+        <p style="text-align: justify;"> 
+            Testing revealed placement and assembly issues that prevented the circuit from operating reliably. A problem that occured was that only few of the LEDs would light up when the touchpoint was activated, and the fade-out behavior was inconsistent.
+            I performed checks on the soldered components, traced back the faulty behavior back to component placement, and corrected the affected connections before retesting the system.
+        </p>
+        <h4> Result </h4>
+        <p style="text-align:justify;">
+            The finished PCB provided touch-based LED activation with a controlled fade-out, demonstrating the interaction between physical input, transistor/IC circuitry, and timing components.
+        </p>
+        <h4> What I Learned </h4>
+        <p style="text-align:justify;">
+            How small physical implementation details can significantly affect the performance of a circuit, and how to troubleshoot and correct issues in a physical hardware build.
+        </p>
+      </p>
+
+      <!--- Youtube Link / TBD--->
+      Project Video - To Be Implemented<br>
+
+      <br>
+      <div class="tag-row">
+        <span class="tag"> Analog Design and Electronics </span>
+        <span class="tag"> Integrated Circuits </span>
+        <span class="tag"> PCB Assembly </span>
+        <span class="tag"> Soldering </span>
+        <span class="tag"> Hardware Debugging and Troubleshooting </span>
+      </div>
+    </div>
+    
+    <!-- Blackjack Simulation -->
+    <div class="project">
+      <div class="project-head">
+        <h3 class="project-title"> Blackjack Simulation </h3>
+        <span class="project-meta"> Personal Project | December 2025 </span>
+      </div>
+      <p class="project-desc"><p style="text-align: justify;">
+        <h4> Project Parameters </h4>
+        <p style="text-align: justify;"> 
+            Develop a Blackjack simulation in C++ to explore game mechanics, strategies, and card-counting mechanics while maintaining the state of a multi-hand game.
+        </p>
+        <h4> Design Process </h4>
+        <p style="text-align: justify;"> 
+            I organized the simulation into separate classes for cards, decks, hands, and overall game mechanics. Each card stores its own value, while the deck manages card creation, shuffling, shoes, and dealing.
+            I implemented standard Blackjack actions including hit, stand, and double down, along with advanced Blackjack rules such as splitting hands, dealer behavior, and insurance bets.
+            A betting and bank system was also implemented, where the simulation also tracks player balance and game statistics tracked across multiple rounds.
+        </p>
+        <h4> Challenges </h4>
+        <p style="text-align: justify;"> 
+            Managing the interactions between different game components required careful handling and proper organization of the game state. 
+            The hardest to manage were the splitting of hands and insurance payouts, which required additional logic to ensure that the game does not break.
+        </p>
+        <h4> Result </h4>
+        <p style="text-align:justify;">
+            The completed simulation supports full Blackjack gameplay while maintaining player balance and statistics over time, allowing different strategies and decisions to be evaluated across games.
+        </p>
+        <h4> What I Learned </h4>
+        <p style="text-align:justify;">
+            Strengthened my understanding of OOP principles in C++, and how to manage complex interactions between different classes and game states by breaking them down into smaller, workable chunks.
+        </p>
+      </p>
+
+      <!--- Youtube Link / TBD--->
+      Project Video - To Be Implemented<br>
+
+      <br>
+      <div class="tag-row">
+        <span class="tag"> C++ </span>
+        <span class="tag"> Object-Oriented Programming </span>
+        <span class="tag"> Game Development </span>
+        <span class="tag"> Card Games </span>
+        <span class="tag"> Algorithm Design </span>
+      </div>
+    </div>    
+    
+    <!-- Hovercraft -->
+    <div class="project">
+      <div class="project-head">
+        <h3 class="project-title"> Hovercraft </h3>
+        <span class="project-meta"> Engineering Project | 2024 </span>
+      </div>
+      <p class="project-desc"><p style="text-align: justify;">
+        <h4> Project Parameters </h4>
+        <p style="text-align: justify;"> 
+            Design and construct a functional hovercraft capable of generating stable lift, forward thrust, and directional control while meeting the project's physical and performance requirements. 
+        </p>
+        <h4> Design Process </h4>
+        <p style="text-align: justify;"> 
+            I coordinated developement with the lift, thrust, and steering subsystem teams, using task delegation and milestone tracking to keep the different components compatible and on schedule.
+            For the physical structure, I designed and fabricated the wooden frame in AutoCad, woodworking techniques, and power tools.
+            The propulsion and lift system was based on a leaf blower, which was tuned to provide stable lift and forward thrust while maintaining hovercraft control.
+        </p>
+        <h4> Challenges </h4>
+        <p style="text-align: justify;"> 
+            Achieving stable lift and control was a challenge, as the hovercraft's weight distribution and propulsion system needed to be carefully balanced.
+            Despite correct Physics calculations, the hovercraft initially struggled to maintain stable lift and control, requiring iterative adjustments to the design and tuning of the propulsion system.
+            Furthermore, coordination between different subteams proved to be a struggle at times, delaying progress on the project.
+        </p>
+        <h4> Result </h4>
+        <p style="text-align:justify;">
+            The completed hovercraft integrated its mechanical structure, lift, propulsion, and steering systems into a functional vehicle.
+        </p>
+        <h4> What I Learned </h4>
+        <p style="text-align:justify;">
+            Learned how changes to one subsystem can affect the performance of the overall system, and how to coordinate with a team to ensure that different components are compatible and work together effectively.
+        </p>
+      </p>
+
+      <!--- Youtube Link --->
+      <a href="https://youtu.be/LE9lXEAE52s" class="youtube-link"> Project Video <br></a>
+
+      <br>
+      <div class="tag-row">
+        <span class="tag"> CAD and Mechanical Design </span>
+        <span class="tag"> Prototyping </span>
+        <span class="tag"> Woodworking and Power Tools </span>
+        <span class="tag"> Physics and Engineering Principles </span>
+        <span class="tag"> Collaborative </span>
+      </div>
+    </div>   
+
+    <!-- VEX Robotics -->
+    <div class="project">
+      <div class="project-head">
+        <h3 class="project-title"> VEX Robotics </h3>
+        <span class="project-meta"> Engineering Project | 2024 </span>
+      </div>
+      <p class="project-desc"><p style="text-align: justify;">
+        <h4> Project Parameters </h4>
+        <p style="text-align: justify;"> 
+             Design and program an autonomous robot capable of performing required scoring tasks while operating under competition constraints.
+        </p>
+        <h4> Design Process </h4>
+        <p style="text-align: justify;"> 
+            I developed and built the robot through mechanical prototyping and component redesign, testing the physical system against competition requirements.
+            Software and mechanical components were developed together so changes to one subsystem could be evaluated against overall robot performance.
+        </p>
+        <h4> Challenges </h4>
+        <p style="text-align: justify;"> 
+            During testing, the robot's performance was highly inconsistent.
+            I diagnosed issues across both the control code and the mechanical frame, identifying and correcting problems in each area.
+            Although the autonomous system was able to perform scoring tasks under some conditions, the robot ultimately failed to achive consistent goal placement.
+        </p>
+        <h4> Result </h4>
+        <p style="text-align:justify;">
+            The final prototype demonstrated autonomous scoring capability under certain conditions, but did not achieve the consistency required for reliable competition performance.
+        </p>
+        <h4> What I Learned </h4>
+        <p style="text-align:justify;">
+            I learned that a system working under controlled conditions is not enough. 
+            Repeated testing and reliability are critical when designing for real-world performance.
+        </p>
+      </p>
+
+      <!--- Youtube Link / TBD--->
+      Project Video - To Be Implemented<br>
+
+      <br>
+      <div class="tag-row">
+        <span class="tag"> VEX Robotics </span>
+        <span class="tag"> Autonomous Systems </span>
+        <span class="tag"> Mechanical Engineering </span>
+        <span class="tag"> Software Development </span>
+        <span class="tag"> Debugging </span>
+      </div>
+    </div>       
+
+  </section>
+
+
+  <!-- Additional Projects -->
+  <section id="more">
+    <h2>Additional Builds and Projects</h2>
+    <div class="more-list">
+      <div class="more-item">
+        <div class="more-item-title"> Canadian Tax Calculator </div>
+        <div class="more-item-desc">
+            Built a C++ tax calculator that estimates income tax based on province and income level. 
+            It uses progressive tax brackets and province-specific rules, with additional GST, HST, and PST calculations.
+        </div> </p>
+      </div>
+
+      <div class="more-item">
+        <div class="more-item-title"> Arduino LCD Scoreboard </div>
+        <div class="more-item-desc">
+            Built an Arduino-based scoreboard using physical buttons and an LCD display. 
+            Programmed real-time score updates based on user input and display control while troubleshooting input timing issues.
+        </div>
+      </div>     
+      
+      <div class="more-item">
+        <div class="more-item-title"> Arduino Piezo Buzzer Music System </div>
+        <div class="more-item-desc">
+            Built a multi-button Arduino music system where each button triggers a different melody through a piezo buzzer. 
+            Programmed and structured audio sequences for playback through a single microcontroller.
+        </div>
+      </div>
+
+      <div class="more-item">
+        <div class="more-item-title"> FamFlavours Mobile App </div>
+        <div class="more-item-desc">
+            Designed a Figma prototype for a recipe-sharing app focused on connecting generations through cultural food. 
+            Coordinated team deliverables and interactive UI design, contributing to a first-place finish in the Game of Apps competition.
+        </div>
+      </div> 
+      
+  </section>
+
+
+  <!-- Experience -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Rides Operator — Playland at PNE</span>
+        <span class="entry-when">Summer 2024 – 2026</span>
+      </div>
+      </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Soccer Referee — Lower Mainland</span>
+        <span class="entry-when">March 2023 – Present</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education + Awards -->
+  <section id="education">
+    <h2>Education &amp; Awards</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Simon Fraser University — Bachelor of Applied Science</span>
+        <span class="entry-when">Sept 2025 – Present</span>
+      </div>
+      <p class="entry-desc">New Westminster District Scholarship (2025) · Catholic Women's League Bursary (2025)</p>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Game of Apps Competition</span>
+        <span class="entry-when">2024</span>
+      </div>
+      <p class="entry-desc">1st place — FamFlavours app</p>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">BC Soccer Association</span>
+        <span class="entry-when">2023</span>
+      </div>
+      <p class="entry-desc">District Referee Certification</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p class="footer-note"> Eugene Magsino · Engineering Science, Simon Fraser University </p>
+    
+    <p class="footer-built"> Built with HTML &amp; CSS</p>
+
+    <a href="#top" class="back-to-top">↑ Back to top</a>
+
+    <p class="footer-copyright">© 2026 Eugene Magsino</p> 
+  
+  </footer>
+
+</body>
+
+</html>
